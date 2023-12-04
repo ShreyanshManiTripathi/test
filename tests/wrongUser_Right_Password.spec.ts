@@ -15,6 +15,7 @@ const browser = await chromium.launch({
   await page.locator('[data-test="password"]').click();
   await page.locator('[data-test="password"]').fill('secret_sauce');
   await page.locator('[data-test="login-button"]').click();
+  await expect(page.locator('[data-test="error"]')).toHaveCount(1);
 
   // ---------------------
   await context.close();

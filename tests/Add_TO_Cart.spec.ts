@@ -18,8 +18,10 @@ const browser = await chromium.launch({
   await page.locator('[data-test="password"]').fill('secret_sauce');
   await page.locator('[data-test="login-button"]').click();
   await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+
   await page.locator('a').filter({ hasText: '1' }).click();
 
+  await expect(page.locator('[class="inventory_item_name"]')).toHaveText('Sauce Labs Backpack');
 
   // ---------------------
   await context.close();
