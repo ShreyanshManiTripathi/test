@@ -33,3 +33,5 @@ test('Selectors demo',async({page})=>{
 await page.locator('input:has-text("LOGIN")').click();
 
 });
+
+
