@@ -1,5 +1,7 @@
 
 import { test, expect,chromium } from '@playwright/test';
+import { Actual_Login } from './methods.spec';
+import { Login_data } from './test_data';
 
 
 test.beforeAll(async () => {
@@ -8,20 +10,24 @@ test.beforeAll(async () => {
     headless: false
   });
   const context = await browser.newContext();
-    
+ 
   
    
   });
 
 
+  let login_data =new Login_data
 
-test.beforeEach(async({page})=>{
-  await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').click();
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
+  test.beforeEach(async({page})=>{
+    await page.goto('https://www.saucedemo.com/'); 
+    await page.locator('[data-test="username"]').click();
+    await page.locator('[data-test="username"]').fill(login_data.username);
+    await page.locator('[data-test="password"]').click();
+    await page.locator('[data-test="password"]').fill(login_data.password);
+    await page.locator('[data-test="login-button"]').click();
+   
+
+  
 })
 
 
@@ -161,6 +167,7 @@ test('Sort:Low To High',(async ({page}) => {
   
     console.log('Done with tests');
   
+
     await context.close();
     await browser.close();
     
