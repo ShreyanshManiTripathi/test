@@ -5,12 +5,17 @@ export class Inventory {
     add_item: Locator
 cart_button:Locator
 remove_button:Locator
+sort_button:Locator
+
 
     constructor(page: Page) {
         this.page = page
         this.add_item=page.locator('[data-test="add-to-cart-sauce-labs-backpack"]')
         this.cart_button=page.locator('a').filter({ hasText: '1' })
         this.remove_button= page.locator('[data-test="remove-sauce-labs-backpack"]')
+        this.sort_button=page.locator('[data-test="product_sort_container"]')
+       
+   
 }
 
 
@@ -32,5 +37,26 @@ async addToCart(){
 async removeFromCart(){
     await this.remove_button.click();
 }
+
+async sortNameAtoZ(){
+    await this.sort_button.click()
+    await this.sort_button.selectOption('az')
+}
+
+async sortNameZtoA(){
+    await this.sort_button.click()
+    await this.sort_button.selectOption('za')
+}
+
+async sortPriceHighToLow(){
+    await this.sort_button.click()
+    await this.sort_button.selectOption('hilo')
+}
+
+async sortPriceLowToHigh(){
+    await this.sort_button.click()
+    await this.sort_button.selectOption('lohi')
+}
+
 
 }

@@ -17,7 +17,7 @@ test.beforeAll(async () => {
 
   let credentials=new Login_data()
 
-//   let login_data =new Login_data
+
 
   test.beforeEach(async({page})=>{
     const Login=new LoginPage(page)
@@ -45,7 +45,7 @@ await cart.checkout('Shreyansh','Tripathi','226028')
 
 });
 
-test.only('add to cart', async ({ page }) => {
+test('add to cart', async ({ page }) => {
 
 
   const cart=new Cart(page)
@@ -54,20 +54,13 @@ await cart.addToCart()
 
 
   
-  // await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
-
-  // await page.locator('a').filter({ hasText: '1' }).click();
-
-  // await expect(page.locator('[class="inventory_item_name"]')).toHaveText('Sauce Labs Backpack');
-
-  // ---------------------
 
 });
 
 
 
 
-test.only('Remove from cart', async ({ page }) => {
+test('Remove from cart', async ({ page }) => {
 
   
   const invent=new Inventory(page)
@@ -86,19 +79,9 @@ test.only('Remove from cart', async ({ page }) => {
   
 test('Validate:Sort:Z to A',(async ({page}) => {
  
- 
+const invent=new Inventory(page) 
 
-  await page.locator('[data-test="product_sort_container"]').click();
-  await page.locator('[data-test="product_sort_container"]').selectOption('za');
-
-
-
-
-
-
-
-
-
+invent.sortNameZtoA()
 
 }))
 
@@ -106,10 +89,9 @@ test('Validate:Sort:Z to A',(async ({page}) => {
 
 test('Validate :Sort:A to Z',(async ({page}) => {
 
-  
- 
-  await page.locator('[data-test="product_sort_container"]').click();
-  await page.locator('[data-test="product_sort_container"]').selectOption('az');  
+  const invent=new Inventory(page) 
+
+invent.sortNameAtoZ()
 
 
 
@@ -123,9 +105,9 @@ test('Validate :Sort:A to Z',(async ({page}) => {
 test('Sort:High to Low',(async ({page}) => {
   
  
+  const invent=new Inventory(page) 
 
-  await page.locator('[data-test="product_sort_container"]').click();
-  await page.locator('[data-test="product_sort_container"]').selectOption('hilo');
+  invent.sortPriceHighToLow()
 
 
 
@@ -136,12 +118,13 @@ test('Sort:High to Low',(async ({page}) => {
 }))
 
 
-test('Sort:Low To High',(async ({page}) => {
+test.only('Sort:Low To High',(async ({page}) => {
 
 
+  const invent=new Inventory(page) 
 
-  await page.locator('[data-test="product_sort_container"]').click();
-  await page.locator('[data-test="product_sort_container"]').selectOption('lohi');
+  invent.sortPriceLowToHigh()
+
 
   
 
