@@ -1,10 +1,9 @@
 
 import { test, expect,chromium } from '@playwright/test';
-import { Actual_Login } from './methods.spec';
 import { Login_data } from './test_data';
 import { LoginPage } from '../pages/login';
 import { Inventory } from '../pages/inventory';
-
+import { Cart } from '../pages/cart';
 test.beforeAll(async () => {
   
   const browser = await chromium.launch({
@@ -34,11 +33,11 @@ test('Checkout', async ({ page }) => {
 
  
 
-const invent=new Inventory(page)
+const cart=new Cart(page)
 
 
 
-await invent.checkout('Shreyansh','Tripathi','226028')
+await cart.checkout('Shreyansh','Tripathi','226028')
 
 
 
@@ -46,11 +45,12 @@ await invent.checkout('Shreyansh','Tripathi','226028')
 
 });
 
-test('add to cart', async ({ page }) => {
+test.only('add to cart', async ({ page }) => {
 
-  const invent=new Inventory(page)
 
-await invent.addToCart()
+  const cart=new Cart(page)
+
+await cart.addToCart()
 
 
   
@@ -67,12 +67,14 @@ await invent.addToCart()
 
 
 
-test('Remove from cart', async ({ page }) => {
+test.only('Remove from cart', async ({ page }) => {
 
   
-  await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
-  await page.locator('a').filter({ hasText: '1' }).click();
-  await page.locator('[data-test="remove-sauce-labs-backpack"]').click();
+  const invent=new Inventory(page)
+
+  await invent.addToCart()
+ 
+  await invent.removeFromCart()
 
  
 
