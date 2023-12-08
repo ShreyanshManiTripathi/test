@@ -54,7 +54,6 @@ async sortPriceHighToLow(){
 }
 
 async sortPriceLowToHigh(){
-    await this.sort_button.click()
     await this.sort_button.selectOption('lohi')
 }
 

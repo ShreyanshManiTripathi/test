@@ -81,7 +81,7 @@ test('Validate:Sort:Z to A',(async ({page}) => {
  
 const invent=new Inventory(page) 
 
-invent.sortNameZtoA()
+await invent.sortNameZtoA()
 
 }))
 
@@ -91,7 +91,7 @@ test('Validate :Sort:A to Z',(async ({page}) => {
 
   const invent=new Inventory(page) 
 
-invent.sortNameAtoZ()
+  await invent.sortNameAtoZ()
 
 
 
@@ -107,7 +107,7 @@ test('Sort:High to Low',(async ({page}) => {
  
   const invent=new Inventory(page) 
 
-  invent.sortPriceHighToLow()
+  await invent.sortPriceHighToLow()
 
 
 
@@ -118,12 +118,12 @@ test('Sort:High to Low',(async ({page}) => {
 }))
 
 
-test.only('Sort:Low To High',(async ({page}) => {
+test('Sort:Low To High',(async ({page}) => {
 
 
   const invent=new Inventory(page) 
 
-  invent.sortPriceLowToHigh()
+ await invent.sortPriceLowToHigh()
 
 
   
