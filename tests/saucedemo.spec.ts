@@ -2,7 +2,8 @@
 import { test, expect,chromium } from '@playwright/test';
 import { Actual_Login } from './methods.spec';
 import { Login_data } from './test_data';
-
+import { LoginPage } from '../pages/login';
+import { Inventory } from '../pages/inventory';
 
 test.beforeAll(async () => {
   
@@ -15,16 +16,14 @@ test.beforeAll(async () => {
    
   });
 
+  let credentials=new Login_data()
 
-  let login_data =new Login_data
+//   let login_data =new Login_data
 
   test.beforeEach(async({page})=>{
-    await page.goto('https://www.saucedemo.com/'); 
-    await page.locator('[data-test="username"]').click();
-    await page.locator('[data-test="username"]').fill(login_data.username);
-    await page.locator('[data-test="password"]').click();
-    await page.locator('[data-test="password"]').fill(login_data.password);
-    await page.locator('[data-test="login-button"]').click();
+    const Login=new LoginPage(page)
+    await Login.gotoLoginPage()
+     await Login.login(credentials.username,credentials.password)
    
 
   
@@ -35,18 +34,13 @@ test('Checkout', async ({ page }) => {
 
  
 
+const invent=new Inventory(page)
 
-  await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
-  await page.locator('a').filter({ hasText: '1' }).click();
-  await page.locator('[data-test="checkout"]').click();
-  await page.locator('[data-test="firstName"]').click();
-  await page.locator('[data-test="firstName"]').fill('Shreyansh Mani');
-  await page.locator('[data-test="lastName"]').click();
-  await page.locator('[data-test="lastName"]').fill('Tripathi');
-  await page.locator('[data-test="postalCode"]').click();
-  await page.locator('[data-test="postalCode"]').fill('226028');
-  await page.locator('[data-test="continue"]').click();
-  await page.locator('[data-test="finish"]').click();
+
+
+await invent.checkout('Shreyansh','Tripathi','226028')
+
+
 
 
 
@@ -54,17 +48,17 @@ test('Checkout', async ({ page }) => {
 
 test('add to cart', async ({ page }) => {
 
+  const invent=new Inventory(page)
+
+await invent.addToCart()
+
+
   
+  // await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
 
+  // await page.locator('a').filter({ hasText: '1' }).click();
 
-
-
-  
-  await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
-
-  await page.locator('a').filter({ hasText: '1' }).click();
-
-  await expect(page.locator('[class="inventory_item_name"]')).toHaveText('Sauce Labs Backpack');
+  // await expect(page.locator('[class="inventory_item_name"]')).toHaveText('Sauce Labs Backpack');
 
   // ---------------------
 
