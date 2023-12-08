@@ -22,24 +22,53 @@ import { LoginPage } from '../pages/login';
     //   })
       
 
+    const credentials=new Login_data()
 
 
 
 
 
-test('Login', async ({ page }) => {
+test('Login using correct username and correct password', async ({ page }) => {
       const Login=new LoginPage(page)
-
  await Login.gotoLoginPage()
-  await Login.login('standard_user','secret_sauce')
+  await Login.login(credentials.username,credentials.password)
  
 
 });
 
 
-      
 
 
+test('Login using correct username and incorrect password', async ({ page }) => {
+  const Login=new LoginPage(page)
+
+await Login.gotoLoginPage()
+await Login.login(credentials.username,credentials.incorrect_password)
+await expect(page.locator('[data-test="error"]')).toHaveCount(1);
+
+});
+
+   
+
+test('Login using incorrect username and correct password', async ({ page }) => {
+  const Login=new LoginPage(page)
+
+await Login.gotoLoginPage()
+await Login.login(credentials.incorrect_User_name,credentials.password)
+await expect(page.locator('[data-test="error"]')).toHaveCount(1);
+
+});   
+
+
+
+test('Login using incorrect username and incorrect password', async ({ page }) => {
+  const Login=new LoginPage(page)
+
+await Login.gotoLoginPage()
+await Login.login(credentials.incorrect_User_name,credentials.incorrect_password)
+await expect(page.locator('[data-test="error"]')).toHaveCount(1);
+
+});
 //       let login_data=new Login_data
 
   
